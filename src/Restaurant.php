@@ -47,6 +47,19 @@
             return $restaurants;
         }
 
+        static function find($search_id)
+        {
+            $found_name = null;
+            $names = Restaurant::getAll();
+            foreach($names as $name) {
+                $name_id = $name->getId();
+                if ($name_id == $search_id) {
+                  $found_name = $name;
+                }
+            }
+            return $found_name;
+        }
+
         static function deleteAll()
         {
           $GLOBALS['DB']->exec("DELETE FROM restaurants;");

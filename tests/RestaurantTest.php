@@ -98,5 +98,25 @@
             $result = Restaurant::getAll();
             $this->assertEquals([], $result);
         }
+
+        function test_find()
+        {
+            //Arrange
+            $type = "Italian";
+            $id = null;
+            $test_cuisine = new Cuisine($type, $id);
+            $test_cuisine->save();
+
+            $name = "Restaurant";
+            $cuisine_id = $test_cuisine->getId();
+            $test_restaurant = new Restaurant($name, $cuisine_id, $id);
+            $test_restaurant->save();
+
+            //Act
+            $result = Restaurant::find($test_restaurant->getId());
+
+            //Assert
+            $this->assertEquals($test_restaurant, $result);
+        }
     }
 ?>
