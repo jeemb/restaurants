@@ -78,5 +78,25 @@
             $this->assertEquals($test_restaurant, $result[0]);
 
         }
+
+        function test_deleteAll()
+        {
+            //Arrange
+            $type = "Italian";
+            $id = null;
+            $test_cuisine = new Cuisine($type, $id);
+            $test_cuisine->save();
+
+            $name = "Restaurant";
+            $cuisine_id = $test_cuisine->getId();
+            $test_restaurant = new Restaurant($name, $cuisine_id, $id);
+
+            //Act
+            Restaurant::deleteAll();
+
+            //Assert
+            $result = Restaurant::getAll();
+            $this->assertEquals([], $result);
+        }
     }
 ?>
