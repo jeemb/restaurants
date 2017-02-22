@@ -18,7 +18,7 @@
 
     use Symfony\Component\HttpFoundation\Request;
     Request::enableHttpMethodParameterOverride();
-    
+
     $app->get("/", function() use ($app) {
 
     return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
@@ -46,6 +46,12 @@
         $cuisine = Cuisine::find($id);
         $cuisine->update($type);
         return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine));
+    });
+
+    $app->delete("/cuisine/{id}", function($id) use ($app) {
+        $cuisine = Cuisine::find($id);
+        $cuisine->delete();
+        return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
     });
 
     return $app;

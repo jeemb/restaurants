@@ -115,6 +115,47 @@
             $this->assertEquals("Home stuff", $test_cuisine->getType());
         }
 
+        function testDelete()
+        {
+            //Arrange
+            $type = "Work stuff";
+            $id = null;
+            $test_cuisine = new Cuisine($type, $id);
+            $test_cuisine->save();
+
+            $type2 = "Home stuff";
+            $test_cuisine2 = new Cuisine($type2, $id);
+            $test_cuisine2->save();
+
+
+            //Act
+            $test_cuisine->delete();
+
+            //Assert
+            $this->assertEquals([$test_cuisine2], Cuisine::getAll());
+        }
+
+        function testDeleteCategoryTasks()
+        {
+            //Arrange
+            $type = "Work stuff";
+            $id = null;
+            $test_cuisine = new Cuisine($type, $id);
+            $test_cuisine->save();
+
+            $name = "Build website";
+            $cuisine_id = $test_cuisine->getId();
+            $test_restaurant = new Restaurant($name, $cuisine_id, $id);
+            $test_restaurant->save();
+
+
+            //Act
+            $test_cuisine->delete();
+
+            //Assert
+            $this->assertEquals([], Restaurant::getAll());
+        }
+
 
         // function test_find()
         // {

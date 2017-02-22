@@ -67,6 +67,12 @@
             $this->setType($new_type);
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM cuisine WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE cuisine_id = {$this->getId()};");
+        }
+
         // function getTasks()
         // {
         //     $tasks = Array();
