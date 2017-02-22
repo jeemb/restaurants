@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Restaurant finder</title>
+    </head>
+    <body>
+        <h1>Find a restaurant</h1>
+        {% if cuisines is not empty %}
+            <p>Here are all your cuisines:</p>
+            <ul>
+                {% for cuisine in cuisines %}
+                    <li>{{ cuisine.getType }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form action='/cuisine' method='post'>
+            <label for='type'>Cuisine name</label>
+            <input id='type' name='type' type='text'>
+
+            <button type='submit'>Add cuisine</button>
+        </form>
+        <form action='/delete_cuisine' method='post'>
+            <button type='submit'>Clear</button>
+        </form>
+    </body>
+</html>
