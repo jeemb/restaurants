@@ -164,5 +164,30 @@
             $this->assertEquals("new restaurant", $test_restaurant->getName());
         }
 
+        function testDelete()
+        {
+            //Arrange
+            $type = "Italian";
+            $id = null;
+            $test_cuisine = new Cuisine($type, $id);
+            $test_cuisine->save();
+
+            $name = "restaurant";
+            $cuisine_id = $test_cuisine->getId();
+            $id = null;
+            $test_restaurant = new Restaurant($name, $cuisine_id, $id);
+            $test_restaurant->save();
+
+            $name2 = "Home stuff";
+            $test_restaurant2 = new Restaurant($name2, $cuisine_id, $id);
+            $test_restaurant2->save();
+
+            //Act
+            $test_restaurant->delete();
+
+            //Assert
+            $this->assertEquals([$test_restaurant2], Restaurant::getAll());
+        }
+
     }
 ?>

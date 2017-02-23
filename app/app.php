@@ -79,11 +79,12 @@
         return $app['twig']->render('index.html.twig', array('cuisines' => $cuisines, 'restaurant' => $restaurant));
     });
 
-    // $app->delete("/restaurant/{id}", function($id) use ($app) {
-    //     $restaurant = Restaurant::find($id);
-    //     $cuisine->delete();
-    //     return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
-    // });
+    $app->delete("/restaurant/{id}", function($id) use ($app) {
+        $cuisines = Cuisine::getAll();
+        $restaurant = Restaurant::find($id);
+        $restaurant->delete();
+        return $app['twig']->render('index.html.twig', array('cuisines' => $cuisines, 'restaurant' => $restaurant));
+    });
 
     return $app;
 
