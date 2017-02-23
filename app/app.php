@@ -76,7 +76,16 @@
         // $restaurants = Restaurant::getAll();
         $restaurant = Restaurant::find($id);
         $restaurant->update($name);
-        return $app['twig']->render('index.html.twig', array('cuisines' => $cuisines, 'restaurant' => $restaurant));
+        $cuisine_id = $restaurant->getCuisineId();
+
+
+
+
+
+        // return $app['twig']->render('index.html.twig', array('cuisines' => $cuisines, 'restaurant' => $restaurant));
+
+
+        return $app->redirect("/cuisine/".$cuisine_id."/edit");
     });
 
     $app->delete("/restaurant/{id}", function($id) use ($app) {

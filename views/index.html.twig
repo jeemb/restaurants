@@ -6,24 +6,26 @@
         <title>Restaurant finder</title>
     </head>
     <body>
-        <h1>Find a restaurant</h1>
-        {% if cuisines is not empty %}
-            <p>Here are all your cuisines:</p>
-            <ul>
-                {% for cuisine in cuisines %}
-                    <li><a href="/cuisine/{{ cuisine.getId }}/edit">{{ cuisine.getType }}</a></li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+        <div class='container'>
+            <h1>Find a restaurant</h1>
+            {% if cuisines is not empty %}
+                <p>Here are all your cuisines:</p>
+                <ul>
+                    {% for cuisine in cuisines %}
+                        <li><a href="/cuisine/{{ cuisine.getId }}/edit">{{ cuisine.getType }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
 
-        <form action='/cuisine' method='post'>
-            <label for='type'>Cuisine name</label>
-            <input id='type' name='type' type='text'>
+            <form action='/cuisine' method='post'>
+                <label for='type'>Cuisine name</label>
+                <input id='type' name='type' type='text'>
 
-            <button type='submit'>Add cuisine</button>
-        </form>
-        <form action='/delete_cuisine' method='post'>
-            <button type='submit'>Clear</button>
-        </form>
+                <button type='submit' class='btn btn-primary'>Add cuisine</button>
+            </form>
+            <form action='/delete_cuisine' method='post'>
+                <button type='submit' class='btn btn-primary'>Clear</button>
+            </form>
+        </div>
     </body>
 </html>

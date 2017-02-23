@@ -6,40 +6,44 @@
         <title>Cuisines</title>
     </head>
     <body>
-        <h1>Update the {{ cuisine.getType }} cuisine </h1>
-        {% if restaurants is not empty %}
-            <p>Here are the restaurants that serve this cuisine:</p>
-            <ul>
-                {% for restaurant in restaurants %}
-                    <li><a href="/restaurant/{{ restaurant.getId }}/edit">{{ restaurant.getName }}</a></li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+        <div class='container'>
+            <h1>Update the {{ cuisine.getType }} cuisine </h1>
+            {% if restaurants is not empty %}
+                <p>Here are the restaurants that serve this cuisine:</p>
+                <ul>
+                    {% for restaurant in restaurants %}
+                        {% if cuisine.getId == restaurant.getCuisineId %}
+                            <li><a href="/restaurant/{{ restaurant.getId }}/edit">{{ restaurant.getName }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endif %}
 
-        <form action='/restaurant' method='post'>
-            <input id="cuisine_id" name="cuisine_id" type="hidden" value="{{ cuisine.getId() }}">
-            <label for='new_restaurant'>Restaurant Name</label>
-            <input id='new_restaurant' name='new_restaurant' type='text'>
+            <form action='/restaurant' method='post'>
+                <input id="cuisine_id" name="cuisine_id" type="hidden" value="{{ cuisine.getId() }}">
+                <label for='new_restaurant'>Restaurant Name</label>
+                <input id='new_restaurant' name='new_restaurant' type='text'>
 
-            <button type='submit'>Add restaurant</button>
-        </form>
-        <br>
+                <button type='submit' class='btn btn-primary'>Add restaurant</button>
+            </form>
+            <br>
 
-        <form action="/cuisine/{{ cuisine.getId }}" method="post">
-            <input name="_method" type="hidden" value="patch">
+            <form action="/cuisine/{{ cuisine.getId }}" method="post">
+                <input name="_method" type="hidden" value="patch">
 
-            <label for="type">Rename your category:</label>
-            <input id="type" name="type" type="text">
+                <label for="type">Rename your category:</label>
+                <input id="type" name="type" type="text">
 
-            <button type="submit">Update</button>
-        </form>
+                <button type="submit" class='btn btn-primary'>Update</button>
+            </form>
 
-        <form action="/cuisine/{{ cuisine.getId }}" method="post">
-            <input name="_method" type="hidden" value="delete">
+            <form action="/cuisine/{{ cuisine.getId }}" method="post">
+                <input name="_method" type="hidden" value="delete">
 
-            <button type="submit">Delete this cuisine</button>
-        </form>
+                <button type="submit" class='btn btn-primary'>Delete this cuisine</button>
+            </form>
 
-        <a href="/">Back</a>
+            <a href="/">Back</a>
+        </div>
     </body>
 </html>
