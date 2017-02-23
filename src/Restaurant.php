@@ -17,6 +17,11 @@
             return $this->id;
         }
 
+        function setName($new_name)
+        {
+            $this->name = $new_name;
+        }
+
         function getName()
         {
             return $this->name;
@@ -63,6 +68,12 @@
         static function deleteAll()
         {
           $GLOBALS['DB']->exec("DELETE FROM restaurants;");
+        }
+
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurants SET name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
         }
 
     }

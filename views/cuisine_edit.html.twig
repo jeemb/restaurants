@@ -11,7 +11,7 @@
             <p>Here are the restaurants that serve this cuisine:</p>
             <ul>
                 {% for restaurant in restaurants %}
-                    <li>{{ restaurant.getName }}</li>
+                    <li><a href="/restaurant/{{ restaurant.getId }}/edit">{{ restaurant.getName }}</a></li>
                 {% endfor %}
             </ul>
         {% endif %}

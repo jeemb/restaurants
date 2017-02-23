@@ -118,5 +118,51 @@
             //Assert
             $this->assertEquals($test_restaurant, $result);
         }
+
+        function test_setName()
+        {
+            //Arrange
+            $type = "Italian";
+            $id = null;
+            $test_cuisine = new Cuisine($type, $id);
+            $test_cuisine->save();
+
+            $name = "restaurant";
+            $cuisine_id = $test_cuisine->getId();
+            $test_restaurant = new Restaurant($name, $cuisine_id, $id);
+            $test_restaurant->save();
+
+            $new_name = "new restaurant";
+
+            //Act
+            $test_restaurant->setName($new_name);
+
+            //Assert
+            $this->assertEquals("new restaurant", $test_restaurant->getName());
+        }
+
+        function testUpdate()
+        {
+            //Arrange
+            $type = "Italian";
+            $id = null;
+            $test_cuisine = new Cuisine($type, $id);
+            $test_cuisine->save();
+
+            $name = "restaurant";
+            $cuisine_id = $test_cuisine->getId();
+            $id = null;
+            $test_restaurant = new Restaurant($name, $cuisine_id, $id);
+            $test_restaurant->save();
+
+            $new_name = "new restaurant";
+
+            //Act
+            $test_restaurant->update($new_name);
+
+            //Assert
+            $this->assertEquals("new restaurant", $test_restaurant->getName());
+        }
+
     }
 ?>
