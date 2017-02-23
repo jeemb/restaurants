@@ -155,7 +155,30 @@
             //Assert
             $this->assertEquals([], Restaurant::getAll());
         }
+        function testGetTasks()
+        {
+            //Arrange
+            $type = "Work stuff";
+            $id = null;
+            $test_cuisine = new Cuisine($type, $id);
+            $test_cuisine->save();
 
+            $test_cuisine_id = $test_cuisine->getId();
+
+            $name = "Email client";
+            $test_restaurant = new Restaurant($name, $test_cuisine_id, $id);
+            $test_restaurant->save();
+
+            $name2 = "Meet with boss";
+            $test_restaurant2 = new Restaurant($name2, $test_cuisine_id, $id);
+            $test_restaurant2->save();
+
+            //Act
+            $result = $test_cuisine->getRestaurants();
+
+            //Assert
+            $this->assertEquals([$test_restaurant, $test_restaurant2], $result);
+        }
 
         // function test_find()
         // {

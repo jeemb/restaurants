@@ -73,18 +73,18 @@
             $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE cuisine_id = {$this->getId()};");
         }
 
-        // function getTasks()
-        // {
-        //     $tasks = Array();
-        //     $returned_tasks = $GLOBALS['DB']->query("SELECT * FROM tasks WHERE category_id = {$this->getId()};");
-        //     foreach($returned_tasks as $task) {
-        //         $description = $task['description'];
-        //         $id = $task['id'];
-        //         $category_id = $task['category_id'];
-        //         $new_task = new Task($description, $id, $category_id);
-        //         array_push($tasks, $new_task);
-        //     }
-        //     return $tasks;
-        // }
+        function getRestaurants()
+        {
+            $restaurants = Array();
+            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants WHERE cuisine_id = {$this->getId()};");
+            foreach($returned_restaurants as $restaurant) {
+                $name = $restaurant['name'];
+                $id = $restaurant['id'];
+                $cuisine_id = $restaurant['cuisine_id'];
+                $new_restaurant = new Restaurant($name, $cuisine_id, $id);
+                array_push($restaurants, $new_restaurant);
+            }
+            return $restaurants;
+        }
     }
 ?>
