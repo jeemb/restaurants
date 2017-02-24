@@ -38,11 +38,19 @@
          $restaurant = new Restaurant($name, $cuisine_id, $id = null);
          $restaurant->save();
          return $app['twig']->render('cuisine_edit.html.twig', array('cuisine' => $cuisine, 'restaurants' => Restaurant::getAll()));
+
+         return $app->redirect("/cuisine/".$cuisine_id."/edit");
     });
 
     $app->get("/cuisine/{id}", function($id) use ($app) {
         $cuisine = Cuisine::find($id);
         return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
+    });
+
+    $app->get("/cuisine/{id}/restaurant", function($id) use ($app) {
+        $cuisine = Cuisine::find($id);
+        $restaurants = Restaurant::getAll();
+        return $app['twig']->render('cuisine_restaurant.html.twig', array('cuisine' => $cuisine, 'restaurants' => $restaurants));
     });
 
     $app->get("/cuisine/{id}/edit", function($id) use ($app) {
@@ -77,14 +85,7 @@
         $restaurant = Restaurant::find($id);
         $restaurant->update($name);
         $cuisine_id = $restaurant->getCuisineId();
-
-
-
-
-
         // return $app['twig']->render('index.html.twig', array('cuisines' => $cuisines, 'restaurant' => $restaurant));
-
-
         return $app->redirect("/cuisine/".$cuisine_id."/edit");
     });
 

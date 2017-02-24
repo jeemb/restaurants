@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Restaurants</title>
+    </head>
+    <body>
+
+        <h1>Restaurants in {{cuisine.getType}} cuisine: </h1>
+        {% if restaurants is not empty %}
+            <p>Here are the restaurants that serve this cuisine:</p>
+            <ul>
+                {% for restaurant in restaurants %}
+                    {% if cuisine.getId == restaurant.getCuisineId %}
+                        <li>{{ restaurant.getName }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <form action="/cuisine/{{ cuisine.getId }}/edit">
+            <button type="submit" name="button">Edit cuisine</button>
+        </form>
+    </body>
+</html>

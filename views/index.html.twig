@@ -12,7 +12,7 @@
                 <p>Here are all your cuisines:</p>
                 <ul>
                     {% for cuisine in cuisines %}
-                        <li><a href="/cuisine/{{ cuisine.getId }}/edit">{{ cuisine.getType }}</a></li>
+                        <li><a href="/cuisine/{{ cuisine.getId }}/restaurant">{{ cuisine.getType }}</a></li>
                     {% endfor %}
                 </ul>
             {% endif %}
